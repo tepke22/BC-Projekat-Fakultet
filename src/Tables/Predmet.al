@@ -9,49 +9,79 @@ table 50101 Predmet
             DataClassification = CustomerContent;
             Caption = 'Predmet ID';
         }
-        field(2; Naziv; Text[100])
+        field(2; Studije; Enum Studije)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Studije';
+        }
+        field(3; "Studijski Program Id"; Code[10])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Studijski Program Id';
+            TableRelation = "Studijski program"."Studijski Program ID" where(Studije = field(Studije));
+        }
+        field(10; Naziv; Text[100])
         {
             DataClassification = CustomerContent;
             Caption = 'Naziv';
         }
-        field(3; "Profesor"; Code[20])
+        field(11; "Profesor"; Code[20])
         {
             DataClassification = CustomerContent;
             Caption = 'Profesor';
-            // TableRelation = Profesor;
-            //TODO Kada se doda tabela Profesor
+            TableRelation = Profesor;
         }
-        field(4; "ESPB Bodovi"; Integer)
+        field(12; "ESPB Bodovi"; Integer)
         {
             DataClassification = CustomerContent;
             Caption = 'ESPB Bodovi';
             BlankZero = true;
+            MinValue = 3;
+            MaxValue = 10;
         }
-        field(5; "Asistent 1"; Text[100])
+        field(13; "Asistent 1"; Text[100])
         {
             DataClassification = CustomerContent;
             Caption = 'Asistent 1';
         }
-        field(6; "Asistent 2"; Text[100])
+        field(14; "Asistent 2"; Text[100])
         {
             DataClassification = CustomerContent;
             Caption = 'Asistent 2';
         }
-        field(7; Semestar; Integer)
+        field(15; Semestar; Integer)
         {
             DataClassification = CustomerContent;
             Caption = 'Semestar';
+            MinValue = 1;
+            MaxValue = 8;
+
+            trigger OnValidate()
+            begin
+                case Rec.Semestar of
+                    1, 2:
+                        Rec.Godina := 1;
+                    3, 4:
+                        Rec.Godina := 2;
+                    5, 6:
+                        Rec.Godina := 3;
+                    7, 8:
+                        Rec.Godina := 4;
+                end;
+            end;
         }
-        field(8; Godina; Integer)
+        field(16; Godina; Integer)
         {
             DataClassification = CustomerContent;
             Caption = 'Godina';
+            Editable = false;
         }
     }
 
     keys
     {
-        key(PK; "Predmet ID")
+        key(PK;
+        "Predmet ID", "Studijski Program Id", Studije)
         {
             Clustered = true;
         }

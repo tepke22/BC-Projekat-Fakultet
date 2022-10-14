@@ -26,6 +26,7 @@ table 50100 Student
             Caption = 'JMBG';
             DataClassification = CustomerContent;
             CharAllowed = '09';
+            NotBlank = true;
 
             trigger OnValidate()
             begin
@@ -60,8 +61,7 @@ table 50100 Student
         {
             Caption = 'Studijski Program';
             DataClassification = CustomerContent;
-            // TableRelation = "Studijski Program"."Studijski Program ID" where(Studije = field(Studije));
-            //TODO Kada se doda tabela Studijski Program
+            TableRelation = "Studijski Program"."Studijski Program ID" where(Studije = field(Studije));
         }
         field(9; "Prosecna Ocena"; Decimal)
         {
