@@ -60,7 +60,8 @@ table 50100 Student
         {
             Caption = 'Studijski Program';
             DataClassification = CustomerContent;
-            TableRelation = "Studijski Program"."Studijski Program ID" where(Studije = field(Studije));
+            // TableRelation = "Studijski Program"."Studijski Program ID" where(Studije = field(Studije));
+            //TODO Kada se doda tabela Studijski Program
         }
         field(9; "Prosecna Ocena"; Decimal)
         {

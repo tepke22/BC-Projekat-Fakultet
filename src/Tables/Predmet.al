@@ -18,7 +18,8 @@ table 50101 Predmet
         {
             DataClassification = CustomerContent;
             Caption = 'Profesor';
-            TableRelation = Profesor;
+            // TableRelation = Profesor;
+            //TODO Kada se doda tabela Profesor
         }
         field(4; "ESPB Bodovi"; Integer)
         {
