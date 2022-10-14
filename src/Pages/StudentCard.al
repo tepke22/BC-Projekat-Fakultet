@@ -1,16 +1,17 @@
 page 50101 "Student Card"
 {
-
-    Caption = 'Student Card';
     PageType = Card;
+    UsageCategory = None;
+    Caption = 'Student';
     SourceTable = Student;
 
     layout
     {
-        area(content)
+        area(Content)
         {
             group(General)
             {
+                Caption = 'General';
                 field("Broj Indeksa"; Rec."Broj Indeksa")
                 {
                     ApplicationArea = All;
@@ -42,6 +43,7 @@ page 50101 "Student Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Mesto field.';
                 }
+
             }
             group(FakultetGroup)
             {
@@ -56,11 +58,6 @@ page 50101 "Student Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Studijski Program field.';
                 }
-                field("Prosecna Ocena"; Rec."Prosecna Ocena")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Prosecna Ocena field.';
-                }
                 field("Broj polozenih predmeta"; Rec."Broj polozenih predmeta")
                 {
                     ApplicationArea = All;
@@ -71,7 +68,46 @@ page 50101 "Student Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the ESPB Bodovi field.';
                 }
+                field("Prosecna Ocena"; Rec."Prosecna Ocena")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Prosecna Ocena field.';
+                }
             }
         }
     }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(ActionName)
+            {
+                ApplicationArea = All;
+                ToolTip = 'Executes the ActionName action.';
+                Caption = 'Say Hello';
+
+                trigger OnAction()
+                begin
+                    Message('Hello ' + Rec.Ime + ' ' + Rec.Prezime);
+                end;
+            }
+        }
+    }
+
+    trigger OnAfterGetCurrRecord()
+    begin
+
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+
+    end;
+
+    trigger OnOpenPage()
+    begin
+
+    end;
+
 }

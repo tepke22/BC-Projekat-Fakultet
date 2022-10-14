@@ -1,14 +1,15 @@
 table 50104 Ispiti
 {
     DataClassification = CustomerContent;
+    Caption = 'Ispiti';
 
     fields
     {
         field(1; "Broj Indeksa"; Code[10])
         {
             DataClassification = CustomerContent;
-            Caption = 'Broj Indeksa';
             TableRelation = Student;
+            Caption = 'Broj Indeksa';
         }
         field(2; Studije; Enum Studije)
         {
@@ -18,14 +19,14 @@ table 50104 Ispiti
         field(3; "Studijski Program ID"; Code[10])
         {
             DataClassification = CustomerContent;
+            TableRelation = "Studijski program" where(Studije = field(Studije));
             Caption = 'Studijski Program ID';
-            TableRelation = "Studijski program";
         }
         field(4; "Predmet ID"; Code[10])
         {
             DataClassification = CustomerContent;
-            Caption = 'Predmet ID';
             TableRelation = Predmet;
+            Caption = 'Predmet ID';
         }
         field(5; Polozen; Boolean)
         {
@@ -59,28 +60,4 @@ table 50104 Ispiti
             Clustered = true;
         }
     }
-
-    var
-        myInt: Integer;
-
-    trigger OnInsert()
-    begin
-
-    end;
-
-    trigger OnModify()
-    begin
-
-    end;
-
-    trigger OnDelete()
-    begin
-
-    end;
-
-    trigger OnRename()
-    begin
-
-    end;
-
 }

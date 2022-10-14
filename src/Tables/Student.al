@@ -2,6 +2,7 @@ table 50100 Student
 {
     Caption = 'Student';
     DataClassification = CustomerContent;
+    DataCaptionFields = "Broj Indeksa", Ime, Prezime, Mesto;
 
     fields
     {

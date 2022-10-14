@@ -53,12 +53,12 @@ page 50100 "Student List"
             action(ActionName)
             {
                 ApplicationArea = All;
-                Caption = 'Akcija 1';
                 ToolTip = 'Executes the ActionName action.';
+                Caption = 'Say Hello';
 
-                trigger OnAction();
+                trigger OnAction()
                 begin
-
+                    Message('Hello ' + Rec.Ime + ' ' + Rec.Prezime);
                 end;
             }
         }
