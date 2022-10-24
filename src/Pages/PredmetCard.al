@@ -64,4 +64,55 @@ page 50106 "Predmet Card"
             }
         }
     }
+
+    local procedure MyProcedure()
+    var
+        Enum: Enum Studije;
+        index: Integer;
+        Predmet: Record Predmet;
+        brojText: Text;
+        brojInteger: integer;
+    begin
+
+        brojText := '5ar';
+        if not Evaluate(brojInteger, brojText) then
+            Error('Nije validan integer podatak!');
+
+        if brojInteger = 5 then
+            Message('Broj je 5');
+
+        Predmet.SetRange(Godina, 2, 4);
+        Predmet.SetFilter(Naziv, '');
+        Predmet.SetRange(Godina, 2, 4);
+        Predmet.SetFilter(Naziv, '');
+        Predmet.SetRange(Godina, 2, 4);
+        Predmet.SetFilter(Naziv, '');
+
+        Predmet.FindSet();
+
+        case Predmet.Naziv of
+            'IT', 'TI':
+                index := 0;
+            'IM':
+                begin
+                    index := 3;
+                    index := 3;
+                end;
+            else
+                index := 5;
+        end;
+
+        Message('Hello World!');
+        Error('');
+        Message('Hello World 2!');
+        if Confirm('Da li ste punoletni?', true) then
+            Message('Punoletni ste!');
+        index := StrMenu('Blue, Plaid, Yellow, Hot Pink, Orange, Unknown', 3);
+        Message(Format(index));
+    end;
+
+    trigger OnOpenPage()
+    begin
+        // MyProcedure();
+    end;
 }

@@ -74,6 +74,10 @@ page 50101 "Student Card"
                     ToolTip = 'Specifies the value of the Prosecna Ocena field.';
                 }
             }
+            part("Ispiti Subform"; "Ispiti Subform")
+            {
+                SubPageLink = "Broj Indeksa" = field("Broj Indeksa");
+            }
         }
     }
 
@@ -90,6 +94,32 @@ page 50101 "Student Card"
                 trigger OnAction()
                 begin
                     Message('Hello ' + Rec.Ime + ' ' + Rec.Prezime);
+                end;
+            }
+            action(BrojPolozenihINePolozenihIspita)
+            {
+                ApplicationArea = All;
+                Caption = 'Broj polozenih/nepolozenih ispita';
+                Image = CoupledUsers;
+
+                trigger OnAction()
+                var
+                    FakultetMgt: Codeunit "Fakultet Mgt.";
+                begin
+                    FakultetMgt.BrojPolozenihINePolozenihIspita(Rec);
+                end;
+            }
+            action(PromenaNepolozeniUPolozeni)
+            {
+                ApplicationArea = All;
+                Caption = 'Promena nepolozenih ispita u polozene';
+                Image = CoupledUsers;
+
+                trigger OnAction()
+                var
+                    FakultetMgt: Codeunit "Fakultet Mgt.";
+                begin
+                    FakultetMgt.PromeniNepolozenUPolozen(Rec);
                 end;
             }
         }

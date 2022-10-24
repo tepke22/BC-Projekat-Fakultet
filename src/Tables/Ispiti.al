@@ -19,7 +19,7 @@ table 50104 Ispiti
         field(3; "Studijski Program ID"; Code[10])
         {
             DataClassification = CustomerContent;
-            TableRelation = "Studijski program" where(Studije = field(Studije));
+            TableRelation = "Studijski program"."Studijski Program ID" where(Studije = field(Studije));
             Caption = 'Studijski Program ID';
         }
         field(4; "Predmet ID"; Code[10])

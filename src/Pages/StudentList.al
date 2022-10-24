@@ -61,6 +61,75 @@ page 50100 "Student List"
                     Message('Hello ' + Rec.Ime + ' ' + Rec.Prezime);
                 end;
             }
+            group("Menadment Fakulteta")
+            {
+                Image = Company;
+                action(UkupanBrojSvihStudenata)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Ukupan broj studenata';
+                    Image = Users;
+
+                    trigger OnAction()
+                    var
+                        FakultetMgt: Codeunit "Fakultet Mgt.";
+                    begin
+                        FakultetMgt.CountAllStudents();
+                    end;
+                }
+                action(UkupanBrojStudenataNaOsnovnimStudijama)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Ukupan broj studenata (osnovne studije)';
+                    Image = CoupledUsers;
+
+                    trigger OnAction()
+                    var
+                        FakultetMgt: Codeunit "Fakultet Mgt.";
+                    begin
+                        FakultetMgt.CountStudentsOsnovneStudije();
+                    end;
+                }
+                action(StudentNamesWithoutDuplicates)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Imena studenata bez duplikata';
+                    Image = CoupledUsers;
+
+                    trigger OnAction()
+                    var
+                        FakultetMgt: Codeunit "Fakultet Mgt.";
+                    begin
+                        FakultetMgt.StudentsNamesWithoutDuplicates();
+                    end;
+                }
+                action(BrojPolozenihINePolozenihIspita)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Broj polozenih/nepolozenih ispita';
+                    Image = CoupledUsers;
+
+                    trigger OnAction()
+                    var
+                        FakultetMgt: Codeunit "Fakultet Mgt.";
+                    begin
+                        FakultetMgt.BrojPolozenihINePolozenihIspita(Rec);
+                    end;
+                }
+                action(PromenaNepolozeniUPolozeni)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Promena nepolozenih ispita u polozene';
+                    Image = CoupledUsers;
+
+                    trigger OnAction()
+                    var
+                        FakultetMgt: Codeunit "Fakultet Mgt.";
+                    begin
+                        FakultetMgt.PromeniNepolozenUPolozen(Rec);
+                    end;
+                }
+            }
         }
     }
 }
