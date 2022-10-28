@@ -1,6 +1,8 @@
 table 50101 Predmet
 {
     DataClassification = CustomerContent;
+    DrillDownPageId = "Predmet Card";
+    LookupPageId = "Predmet List";
 
     fields
     {
@@ -76,12 +78,18 @@ table 50101 Predmet
             Caption = 'Godina';
             Editable = false;
         }
+        field(18; "Broj studenata na predmetu"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count(Ispiti where("Predmet ID" = field("Predmet ID"), Studije = field(Studije), "Studijski Program ID" = field("Studijski Program Id")));
+            Caption = 'Broj studenata na predmetu';
+            Editable = false;
+        }
     }
 
     keys
     {
-        key(PK;
-        "Predmet ID", "Studijski Program Id", Studije)
+        key(PK; "Predmet ID", "Studijski Program Id", Studije)
         {
             Clustered = true;
         }

@@ -2,6 +2,8 @@ table 50104 Ispiti
 {
     DataClassification = CustomerContent;
     Caption = 'Ispiti';
+    DrillDownPageId = "Ispiti List";
+    LookupPageId = "Ispiti List";
 
     fields
     {
@@ -50,6 +52,13 @@ table 50104 Ispiti
         {
             DataClassification = CustomerContent;
             Caption = 'Komentar';
+        }
+        field(9; "Naziv Predmeta"; Text[100])
+        {
+            FieldClass = FlowField;
+            CalcFormula = lookup(Predmet.Naziv where("Predmet ID" = field("Predmet ID")));
+            Caption = 'Naziv Predmeta';
+            Editable = false;
         }
     }
 

@@ -44,6 +44,14 @@ page 50100 "Student List"
                 }
             }
         }
+        area(FactBoxes)
+        {
+            part(IspitiStudentaFB; "Ispiti List Part")
+            {
+                ApplicationArea = All;
+                SubPageLink = "Broj Indeksa" = field("Broj Indeksa"), "Studijski Program ID" = field("Studijski Program"), Studije = field(Studije);
+            }
+        }
     }
 
     actions
@@ -69,6 +77,10 @@ page 50100 "Student List"
                     ApplicationArea = All;
                     Caption = 'Ukupan broj studenata';
                     Image = Users;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+                    Visible = false;
 
                     trigger OnAction()
                     var

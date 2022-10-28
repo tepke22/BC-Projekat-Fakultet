@@ -37,11 +37,13 @@ page 50101 "Student Card"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Email field.';
+                    Visible = false;
                 }
                 field(Mesto; Rec.Mesto)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Mesto field.';
+                    Visible = false;
                 }
 
             }
@@ -74,9 +76,21 @@ page 50101 "Student Card"
                     ToolTip = 'Specifies the value of the Prosecna Ocena field.';
                 }
             }
-            part("Ispiti Subform"; "Ispiti Subform")
+            part(IspitiStudentaPart; "Ispiti List Part")
             {
-                SubPageLink = "Broj Indeksa" = field("Broj Indeksa");
+                ApplicationArea = All;
+                SubPageLink = "Broj Indeksa" = field("Broj Indeksa"), "Studijski Program ID" = field("Studijski Program"), Studije = field(Studije);
+                Caption = 'Ispiti';
+            }
+        }
+        area(FactBoxes)
+        {
+            part(PredmetInfoFB; "Predmet Card Part")
+            {
+                ApplicationArea = All;
+                Caption = 'Predmet Info';
+                Provider = IspitiStudentaPart;
+                SubPageLink = "Predmet ID" = field("Predmet ID"), "Studijski Program Id" = field("Studijski Program Id"), Studije = field(Studije);
             }
         }
     }
@@ -101,6 +115,9 @@ page 50101 "Student Card"
                 ApplicationArea = All;
                 Caption = 'Broj polozenih/nepolozenih ispita';
                 Image = CoupledUsers;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 var
@@ -114,6 +131,9 @@ page 50101 "Student Card"
                 ApplicationArea = All;
                 Caption = 'Promena nepolozenih ispita u polozene';
                 Image = CoupledUsers;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 var

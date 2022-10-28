@@ -1,11 +1,11 @@
-page 50108 "Ispiti List"
+page 50107 "Ispiti List Part"
 {
 
-    Caption = 'Ispiti List';
-    PageType = List;
+    Caption = 'Ispiti List Part';
+    PageType = ListPart;
     SourceTable = Ispiti;
-    UsageCategory = Lists;
-    ApplicationArea = All;
+    UsageCategory = None;
+    Editable = false;
 
     layout
     {
@@ -13,10 +13,6 @@ page 50108 "Ispiti List"
         {
             repeater(General)
             {
-                field("Broj Indeksa"; Rec."Broj Indeksa")
-                {
-                    ApplicationArea = All;
-                }
                 field("Predmet ID"; Rec."Predmet ID")
                 {
                     ApplicationArea = All;
@@ -24,28 +20,16 @@ page 50108 "Ispiti List"
                 field("Naziv Predmeta"; Rec."Naziv Predmeta")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Naziv Predmeta field.';
-                }
-                field("Studijski Program ID"; Rec."Studijski Program ID")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Studijski Program ID field.';
-                }
-                field(Studije; Rec.Studije)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Studije field.';
                 }
                 field(Polozen; Rec.Polozen)
                 {
                     ApplicationArea = All;
                 }
-
                 field(Ocena; Rec.Ocena)
                 {
                     ApplicationArea = All;
                 }
-                field("Broj Izlazaka"; Rec."Broj Izlazaka")
+                field("Broj izlazaka"; Rec."Broj izlazaka")
                 {
                     ApplicationArea = All;
                 }
@@ -53,6 +37,27 @@ page 50108 "Ispiti List"
                 {
                     ApplicationArea = All;
                 }
+            }
+        }
+    }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(OpenPredmetCard)
+            {
+                ApplicationArea = All;
+                Caption = 'Otvori karticu predmeta';
+                Image = Card;
+
+                trigger OnAction()
+                var
+                    Predmet: Record Predmet;
+                begin
+                    Predmet.Get(Rec."Predmet ID", Rec."Studijski Program ID", Rec.Studije);
+                    Page.RunModal(Page::"Predmet Card", Predmet);
+                end;
             }
         }
     }

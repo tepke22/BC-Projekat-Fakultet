@@ -2,6 +2,8 @@ table 50103 Profesor
 {
     Caption = 'Profesor';
     DataClassification = ToBeClassified;
+    LookupPageId = "Profesor List";
+    DrillDownPageId = "Profesor Card";
 
     fields
     {

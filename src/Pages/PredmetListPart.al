@@ -1,11 +1,11 @@
-page 50111 "Ispiti Subform"
+page 50109 "Predmet List Part"
 {
 
-    ApplicationArea = All;
-    Caption = 'Ispiti Subform';
+    Caption = 'Predmet List Part';
     PageType = ListPart;
-    SourceTable = Ispiti;
-    UsageCategory = Lists;
+    SourceTable = Predmet;
+    UsageCategory = none;
+    Editable = false;
 
     layout
     {
@@ -13,7 +13,7 @@ page 50111 "Ispiti Subform"
         {
             repeater(General)
             {
-                field("Broj Indeksa"; Rec."Broj Indeksa")
+                field("Predmet ID"; Rec."Predmet ID")
                 {
                     ApplicationArea = All;
                 }
@@ -21,27 +21,31 @@ page 50111 "Ispiti Subform"
                 {
                     ApplicationArea = All;
                 }
-                field("Studijski Program ID"; Rec."Studijski Program ID")
+                field("Studijski Program Id"; Rec."Studijski Program Id")
                 {
                     ApplicationArea = All;
                 }
-                field("Predmet ID"; Rec."Predmet ID")
+                field(Naziv; Rec.Naziv)
                 {
                     ApplicationArea = All;
                 }
-                field(Polozen; Rec.Polozen)
+                field("ESPB Bodovi"; Rec."ESPB Bodovi")
                 {
                     ApplicationArea = All;
                 }
-                field(Ocena; Rec.Ocena)
+                field("Asistent 1"; Rec."Asistent 1")
                 {
                     ApplicationArea = All;
                 }
-                field("Broj izlazaka"; Rec."Broj izlazaka")
+                field("Asistent 2"; Rec."Asistent 2")
                 {
                     ApplicationArea = All;
                 }
-                field(Komentar; Rec.Komentar)
+                field(Semestar; Rec.Semestar)
+                {
+                    ApplicationArea = All;
+                }
+                field(Godina; Rec.Godina)
                 {
                     ApplicationArea = All;
                 }
