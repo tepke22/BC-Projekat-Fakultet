@@ -54,11 +54,13 @@ page 50101 "Student Card"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Studije field.';
+                    ShowMandatory = true;
                 }
                 field("Studijski Program"; Rec."Studijski Program")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Studijski Program field.';
+                    ShowMandatory = true;
                 }
                 field("Broj polozenih predmeta"; Rec."Broj polozenih predmeta")
                 {

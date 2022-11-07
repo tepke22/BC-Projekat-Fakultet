@@ -34,13 +34,20 @@ table 50104 Ispiti
         {
             DataClassification = CustomerContent;
             Caption = 'Polozen';
+            Editable = false;
         }
         field(6; Ocena; Integer)
         {
             DataClassification = CustomerContent;
             Caption = 'Ocena';
+            InitValue = 5;
             MinValue = 5;
             MaxValue = 10;
+
+            trigger OnValidate()
+            begin
+                Polozen := (Ocena >= 6) and (Ocena <= 10);
+            end;
         }
         field(7; "Broj izlazaka"; Integer)
         {
@@ -69,4 +76,13 @@ table 50104 Ispiti
             Clustered = true;
         }
     }
+
+    trigger OnDelete()
+    var
+        UserSetup: Record "User Setup";
+    begin
+        UserSetup.Get(UserId);
+        if not UserSetup."Dozvoli Brisanje Ispita" then
+            Error('Nemate odgovarajuca prava za brisanje ispita!!!');
+    end;
 }

@@ -59,12 +59,22 @@ table 50100 Student
         {
             Caption = 'Studije';
             DataClassification = CustomerContent;
+
+            trigger OnValidate()
+            begin
+                ProveraZaPostojecimIspitima('studije');
+            end;
         }
         field(8; "Studijski Program"; Code[10])
         {
             Caption = 'Studijski Program';
             DataClassification = CustomerContent;
             TableRelation = "Studijski Program"."Studijski Program ID" where(Studije = field(Studije));
+
+            trigger OnValidate()
+            begin
+                ProveraZaPostojecimIspitima('studijski program');
+            end;
         }
         field(9; "Prosecna Ocena"; Decimal)
         {
@@ -99,5 +109,38 @@ table 50100 Student
             Unique = true;
         }
     }
+
+    trigger OnDelete()
+    var
+        Ispiti: Record Ispiti;
+    begin
+
+        if StudentPolozioNekiIspit() then
+            Error('Student ima polozen barem jedan ispit, brisanje nije moguce!!!');
+
+        Ispiti.SetRange("Broj Indeksa", Rec."Broj Indeksa");
+        if not Ispiti.IsEmpty() then
+            Ispiti.DeleteAll(true);
+    end;
+
+    local procedure StudentPolozioNekiIspit(): Boolean
+    var
+        Ispiti: Record Ispiti;
+    begin
+        Ispiti.SetFilter("Broj Indeksa", '=%1', Rec."Broj Indeksa");
+        Ispiti.SetRange(Polozen, true);
+        exit(not Ispiti.IsEmpty());
+    end;
+
+    local procedure ProveraZaPostojecimIspitima(IzmenjenoPolje: Text)
+    var
+        Ispiti: Record Ispiti;
+    begin
+        Ispiti.SetRange("Broj Indeksa", Rec."Broj Indeksa");
+        Ispiti.SetRange(Studije, xRec.Studije);
+        Ispiti.SetRange("Studijski Program ID", xRec."Studijski Program");
+        if not Ispiti.IsEmpty() then
+            Error('Nije moguce izmeniti %1 studentu, vec je upisan na neke ispite!', IzmenjenoPolje);
+    end;
 
 }
