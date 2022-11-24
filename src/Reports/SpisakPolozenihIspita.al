@@ -39,17 +39,14 @@ report 50100 "Spisak Polozenih Ispita"
                 {
                     IncludeCaption = false;
                 }
-                column(ESPBBodoviIspita; ESPBBodoviIspita)
+                column(ESPBBodoviIspita; Ispiti."ESPB Bodovi")
                 {
                     IncludeCaption = false;
                 }
 
                 trigger OnAfterGetRecord()
                 var
-                    Predmet: Record Predmet;
                 begin
-                    if Predmet.Get(Ispiti."Predmet ID", Ispiti."Studijski Program ID", Ispiti.Studije) then
-                        ESPBBodoviIspita := Predmet."ESPB Bodovi";
                 end;
             }
 

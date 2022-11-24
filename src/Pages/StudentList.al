@@ -74,6 +74,10 @@ page 50100 "Student List"
                 ApplicationArea = All;
                 ToolTip = 'Executes the Update Email action.';
                 Caption = 'Update Email';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                PromotedOnly = true;
                 Image = Email;
 
                 trigger OnAction()

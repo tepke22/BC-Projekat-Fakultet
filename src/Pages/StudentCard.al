@@ -151,6 +151,9 @@ page 50101 "Student Card"
             {
                 ApplicationArea = All;
                 Caption = 'Spisak Polozenih Predmeta';
+                Promoted = true;
+                PromotedCategory = Report;
+                PromotedIsBig = true;
                 ToolTip = 'Stampa izvestaj polozenih ispita studenta';
                 Image = CheckList;
 
