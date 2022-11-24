@@ -31,15 +31,19 @@ page 50106 "Predmet Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Naziv field.';
                 }
+            }
+            group(ProfesorAsistentInfo)
+            {
+                Caption = 'Profesori i Asistenti';
                 field(Profesor; Rec.Profesor)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Profesor field.';
                 }
-                field("ESPB Bodovi"; Rec."ESPB Bodovi")
+                field(NazivProfesora; Rec."Naziv Profesora")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the ESPB Bodovi field.';
+                    ToolTip = 'Specifies the value of the Naziv Profesora field.';
                 }
                 field("Asistent 1"; Rec."Asistent 1")
                 {
@@ -51,6 +55,15 @@ page 50106 "Predmet Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Asistent 2 field.';
                 }
+            }
+            group(Info)
+            {
+                field("ESPB Bodovi"; Rec."ESPB Bodovi")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the ESPB Bodovi field.';
+                }
+
                 field(Semestar; Rec.Semestar)
                 {
                     ApplicationArea = All;

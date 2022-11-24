@@ -80,19 +80,24 @@ table 50100 Student
         {
             BlankZero = true;
             Caption = 'Prosecna Ocena';
+            FieldClass = FlowField;
+            CalcFormula = average(Ispiti.Ocena where(Studije = field(Studije), "Studijski Program ID" = field("Studijski Program"), "Broj Indeksa" = field("Broj Indeksa"), Polozen = const(true)));
             Editable = false;
         }
-        field(10; "Broj polozenih predmeta"; Integer)
+        field(10; "Broj nepolozenih predmeta"; Integer)
         {
             BlankZero = true;
-            Caption = 'Broj polozenih predmeta';
+            Caption = 'Broj nepolozenih predmeta';
+            FieldClass = FlowField;
+            CalcFormula = count(Ispiti where(Studije = field(Studije), "Studijski Program ID" = field("Studijski Program"), "Broj Indeksa" = field("Broj Indeksa"), Polozen = const(false)));
             Editable = false;
         }
         field(11; "ESPB Bodovi"; Integer)
         {
             BlankZero = true;
             Caption = 'ESPB Bodovi';
-            DataClassification = CustomerContent;
+            FieldClass = FlowField;
+            CalcFormula = sum(Ispiti."ESPB Bodovi" where(Studije = field(Studije), "Studijski Program ID" = field("Studijski Program"), "Broj Indeksa" = field("Broj Indeksa"), Polozen = const(true)));
             Editable = false;
         }
 

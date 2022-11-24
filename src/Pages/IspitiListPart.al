@@ -16,26 +16,32 @@ page 50107 "Ispiti List Part"
                 field("Predmet ID"; Rec."Predmet ID")
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Predmet ID field.';
                 }
                 field("Naziv Predmeta"; Rec."Naziv Predmeta")
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Naziv Predmeta field.';
                 }
                 field(Polozen; Rec.Polozen)
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Polozen field.';
                 }
                 field(Ocena; Rec.Ocena)
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Ocena field.';
                 }
                 field("Broj izlazaka"; Rec."Broj izlazaka")
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Broj izlazaka field.';
                 }
                 field(Komentar; Rec.Komentar)
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Komentar field.';
                 }
             }
         }
@@ -50,6 +56,7 @@ page 50107 "Ispiti List Part"
                 ApplicationArea = All;
                 Caption = 'Otvori karticu predmeta';
                 Image = Card;
+                ToolTip = 'Executes the Otvori karticu predmeta action.';
 
                 trigger OnAction()
                 var

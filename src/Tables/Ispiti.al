@@ -29,6 +29,15 @@ table 50104 Ispiti
             DataClassification = CustomerContent;
             TableRelation = Predmet;
             Caption = 'Predmet ID';
+
+            trigger OnValidate()
+            var
+                Predmet: Record Predmet;
+            begin
+                if not Predmet.Get(Rec."Predmet ID", Rec."Studijski Program ID", Rec.Studije) then
+                    exit;
+                Rec."ESPB Bodovi" := Predmet."ESPB Bodovi";
+            end;
         }
         field(5; Polozen; Boolean)
         {
@@ -36,7 +45,7 @@ table 50104 Ispiti
             Caption = 'Polozen';
             Editable = false;
         }
-        field(6; Ocena; Integer)
+        field(6; Ocena; Decimal)
         {
             DataClassification = CustomerContent;
             Caption = 'Ocena';
@@ -63,9 +72,15 @@ table 50104 Ispiti
         field(9; "Naziv Predmeta"; Text[100])
         {
             FieldClass = FlowField;
-            CalcFormula = lookup(Predmet.Naziv where("Predmet ID" = field("Predmet ID")));
+            CalcFormula = lookup(Predmet.Naziv where("Predmet ID" = field("Predmet ID"), Studije = field(Studije), "Studijski Program Id" = field("Studijski Program ID")));
             Caption = 'Naziv Predmeta';
             Editable = false;
+        }
+        field(10; "ESPB Bodovi"; Integer)
+        {
+            DataClassification = CustomerContent;
+            Editable = false;
+            Caption = 'ESPB Bodovi';
         }
     }
 

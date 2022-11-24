@@ -37,4 +37,31 @@ page 50103 "Profesor List"
             }
         }
     }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(UpdateEmail)
+            {
+                ApplicationArea = All;
+                ToolTip = 'Executes the Update Email action.';
+                Caption = 'Update Email';
+                Image = Email;
+
+                trigger OnAction()
+                var
+                    Profesor: Record Profesor;
+                begin
+                    if Profesor.IsEmpty() then
+                        exit;
+                    Profesor.FindSet();
+                    repeat
+                        Profesor.Email := LowerCase(Profesor.Ime) + '.' + LowerCase(Profesor.Prezime) + '@ftn.kg.ac.rs';
+                        Profesor.Modify();
+                    until Profesor.Next() = 0;
+                end;
+            }
+        }
+    }
 }

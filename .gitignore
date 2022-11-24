@@ -2,3 +2,4 @@
 .snapshots
 .vscode/rad.json
 *.app
+.vscode/.alcache
