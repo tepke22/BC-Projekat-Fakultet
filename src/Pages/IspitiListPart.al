@@ -1,4 +1,4 @@
-page 50107 "Ispiti List Part"
+page 50111 "Ispiti List Part"
 {
 
     Caption = 'Ispiti List Part';

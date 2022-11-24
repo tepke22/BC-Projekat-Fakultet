@@ -54,13 +54,11 @@ page 50101 "Student Card"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Studije field.';
-                    ShowMandatory = true;
                 }
                 field("Studijski Program"; Rec."Studijski Program")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Studijski Program field.';
-                    ShowMandatory = true;
                 }
                 field("Broj polozenih predmeta"; Rec."Broj nepolozenih predmeta")
                 {
@@ -144,6 +142,26 @@ page 50101 "Student Card"
                     FakultetMgt: Codeunit "Fakultet Mgt.";
                 begin
                     FakultetMgt.PromeniNepolozenUPolozen(Rec);
+                end;
+            }
+        }
+        area(Reporting)
+        {
+            action(SpisakPolozenihPredmeta)
+            {
+                ApplicationArea = All;
+                Caption = 'Spisak Polozenih Predmeta';
+                ToolTip = 'Stampa izvestaj polozenih ispita studenta';
+                Image = CheckList;
+
+                trigger OnAction()
+                var
+                    SpisakPolozenihIspita: Report "Spisak Polozenih Ispita";
+                    Student: Record Student;
+                begin
+                    Student.SetRange("Broj Indeksa", Rec."Broj Indeksa");
+                    SpisakPolozenihIspita.SetTableView(Student);
+                    SpisakPolozenihIspita.Run();
                 end;
             }
         }
