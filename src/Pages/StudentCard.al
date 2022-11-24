@@ -62,7 +62,7 @@ page 50101 "Student Card"
                     ToolTip = 'Specifies the value of the Studijski Program field.';
                     ShowMandatory = true;
                 }
-                field("Broj polozenih predmeta"; Rec."Broj polozenih predmeta")
+                field("Broj polozenih predmeta"; Rec."Broj nepolozenih predmeta")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Broj polozenih predmeta field.';
@@ -120,6 +120,7 @@ page 50101 "Student Card"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedOnly = true;
+                ToolTip = 'Executes the Broj polozenih/nepolozenih ispita action.';
 
                 trigger OnAction()
                 var
@@ -136,6 +137,7 @@ page 50101 "Student Card"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedOnly = true;
+                ToolTip = 'Executes the Promena nepolozenih ispita u polozene action.';
 
                 trigger OnAction()
                 var

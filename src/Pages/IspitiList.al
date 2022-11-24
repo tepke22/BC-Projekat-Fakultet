@@ -16,10 +16,12 @@ page 50108 "Ispiti List"
                 field("Broj Indeksa"; Rec."Broj Indeksa")
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Broj Indeksa field.';
                 }
                 field("Predmet ID"; Rec."Predmet ID")
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Predmet ID field.';
                 }
                 field("Naziv Predmeta"; Rec."Naziv Predmeta")
                 {
@@ -39,21 +41,49 @@ page 50108 "Ispiti List"
                 field(Polozen; Rec.Polozen)
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Polozen field.';
                 }
 
                 field(Ocena; Rec.Ocena)
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Ocena field.';
                 }
                 field("Broj Izlazaka"; Rec."Broj Izlazaka")
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Broj izlazaka field.';
                 }
                 field(Komentar; Rec.Komentar)
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Komentar field.';
                 }
             }
         }
     }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(RandomIspiti)
+            {
+                ApplicationArea = All;
+                Caption = 'Random Ispiti';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Image = ReturnRelated;
+
+                trigger OnAction()
+                var
+                    FakultetMgt: Codeunit "Fakultet Mgt.";
+                begin
+                    FakultetMgt.InsertRandomIspiti();
+                end;
+            }
+        }
+    }
+
 }

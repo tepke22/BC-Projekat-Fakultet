@@ -58,15 +58,35 @@ page 50100 "Student List"
     {
         area(Processing)
         {
-            action(ActionName)
+            action(SayHello)
             {
                 ApplicationArea = All;
-                ToolTip = 'Executes the ActionName action.';
+                ToolTip = 'Executes the Say Hello action.';
                 Caption = 'Say Hello';
 
                 trigger OnAction()
                 begin
                     Message('Hello ' + Rec.Ime + ' ' + Rec.Prezime);
+                end;
+            }
+            action(UpdateEmail)
+            {
+                ApplicationArea = All;
+                ToolTip = 'Executes the Update Email action.';
+                Caption = 'Update Email';
+                Image = Email;
+
+                trigger OnAction()
+                var
+                    Student: Record Student;
+                begin
+                    if Student.IsEmpty() then
+                        exit;
+                    Student.FindSet();
+                    repeat
+                        Student.Email := LowerCase(Student.Ime) + '.' + LowerCase(Student.Prezime) + '@gmail.com';
+                        Student.Modify();
+                    until Student.Next() = 0;
                 end;
             }
             group("Menadment Fakulteta")
@@ -81,6 +101,7 @@ page 50100 "Student List"
                     PromotedCategory = Process;
                     PromotedOnly = true;
                     Visible = false;
+                    ToolTip = 'Executes the Ukupan broj studenata action.';
 
                     trigger OnAction()
                     var
@@ -94,6 +115,7 @@ page 50100 "Student List"
                     ApplicationArea = All;
                     Caption = 'Ukupan broj studenata (osnovne studije)';
                     Image = CoupledUsers;
+                    ToolTip = 'Executes the Ukupan broj studenata (osnovne studije) action.';
 
                     trigger OnAction()
                     var
@@ -107,6 +129,7 @@ page 50100 "Student List"
                     ApplicationArea = All;
                     Caption = 'Imena studenata bez duplikata';
                     Image = CoupledUsers;
+                    ToolTip = 'Executes the Imena studenata bez duplikata action.';
 
                     trigger OnAction()
                     var
@@ -120,6 +143,7 @@ page 50100 "Student List"
                     ApplicationArea = All;
                     Caption = 'Broj polozenih/nepolozenih ispita';
                     Image = CoupledUsers;
+                    ToolTip = 'Executes the Broj polozenih/nepolozenih ispita action.';
 
                     trigger OnAction()
                     var
@@ -133,6 +157,7 @@ page 50100 "Student List"
                     ApplicationArea = All;
                     Caption = 'Promena nepolozenih ispita u polozene';
                     Image = CoupledUsers;
+                    ToolTip = 'Executes the Promena nepolozenih ispita u polozene action.';
 
                     trigger OnAction()
                     var

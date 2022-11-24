@@ -32,6 +32,16 @@ table 50101 Predmet
             DataClassification = CustomerContent;
             Caption = 'Profesor';
             TableRelation = Profesor;
+
+            trigger OnValidate()
+            var
+                Profesor: Record Profesor;
+            begin
+                if not Profesor.Get(Rec.Profesor) then
+                    exit;
+                Rec."Naziv Profesora" := Profesor.Ime + ' ' + Profesor.Prezime;
+                Rec.Modify();
+            end;
         }
         field(12; "ESPB Bodovi"; Integer)
         {
@@ -83,6 +93,12 @@ table 50101 Predmet
             FieldClass = FlowField;
             CalcFormula = count(Ispiti where("Predmet ID" = field("Predmet ID"), Studije = field(Studije), "Studijski Program ID" = field("Studijski Program Id")));
             Caption = 'Broj studenata na predmetu';
+            Editable = false;
+        }
+        field(20; "Naziv Profesora"; Text[200])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Naziv Profesora';
             Editable = false;
         }
     }
