@@ -1,4 +1,4 @@
-table 50101 Predmet
+table 50105 Predmet
 {
     DataClassification = CustomerContent;
     DrillDownPageId = "Predmet Card";

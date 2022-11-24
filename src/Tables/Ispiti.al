@@ -12,22 +12,36 @@ table 50104 Ispiti
             DataClassification = CustomerContent;
             TableRelation = Student;
             Caption = 'Broj Indeksa';
+            NotBlank = true;
+
+            trigger OnValidate()
+            var
+                Student: Record Student;
+            begin
+                if not Student.Get(Rec."Broj Indeksa") then
+                    exit;
+                Studije := Student.Studije;
+                "Studijski Program ID" := Student."Studijski Program";
+            end;
         }
         field(2; Studije; Enum Studije)
         {
             DataClassification = CustomerContent;
             Caption = 'Studije';
+            Editable = false;
         }
         field(3; "Studijski Program ID"; Code[10])
         {
             DataClassification = CustomerContent;
             TableRelation = "Studijski program"."Studijski Program ID" where(Studije = field(Studije));
             Caption = 'Studijski Program ID';
+            Editable = false;
         }
         field(4; "Predmet ID"; Code[10])
         {
             DataClassification = CustomerContent;
-            TableRelation = Predmet;
+            NotBlank = true;
+            TableRelation = Predmet where(Studije = field(Studije), "Studijski Program Id" = field("Studijski Program ID"));
             Caption = 'Predmet ID';
 
             trigger OnValidate()
@@ -52,9 +66,9 @@ table 50104 Ispiti
             InitValue = 5;
             MinValue = 5;
             MaxValue = 10;
-
             trigger OnValidate()
             begin
+                //V6: 1.3 add currpage.update on the page afterwards to update data
                 Polozen := (Ocena >= 6) and (Ocena <= 10);
             end;
         }
@@ -96,8 +110,10 @@ table 50104 Ispiti
     var
         UserSetup: Record "User Setup";
     begin
-        UserSetup.Get(UserId);
+        //V6: 1.4
+        UserSetup.get(UserId);
         if not UserSetup."Dozvoli Brisanje Ispita" then
-            Error('Nemate odgovarajuca prava za brisanje ispita!!!');
+            if Polozen = true then
+                Error('Nije moguce obrisati pozolen ispit. Morate imati admin prava');
     end;
 }

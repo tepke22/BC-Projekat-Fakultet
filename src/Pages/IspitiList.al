@@ -18,32 +18,32 @@ page 50108 "Ispiti List"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Broj Indeksa field.';
                 }
-                field("Predmet ID"; Rec."Predmet ID")
+                field(Studije; Rec.Studije)
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Predmet ID field.';
-                }
-                field("Naziv Predmeta"; Rec."Naziv Predmeta")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Naziv Predmeta field.';
+                    ToolTip = 'Specifies the value of the Studije field.';
                 }
                 field("Studijski Program ID"; Rec."Studijski Program ID")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Studijski Program ID field.';
                 }
-                field(Studije; Rec.Studije)
+                field("Predmet ID"; Rec."Predmet ID")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Studije field.';
+                    ToolTip = 'Specifies the value of the Predmet ID field.';
+                    ShowMandatory = true;
+                }
+                field("Naziv Predmeta"; Rec."Naziv Predmeta")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Naziv Predmeta field.';
                 }
                 field(Polozen; Rec.Polozen)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Polozen field.';
                 }
-
                 field(Ocena; Rec.Ocena)
                 {
                     ApplicationArea = All;
