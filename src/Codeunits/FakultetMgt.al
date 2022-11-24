@@ -103,8 +103,11 @@ codeunit 50100 "Fakultet Mgt."
     var
         Student: Record Student;
         Predmet: Record Predmet;
+        Ispiti: Record Ispiti;
     begin
         i := 0;
+        if not Ispiti.IsEmpty() then
+            Ispiti.DeleteAll();
         if Student.IsEmpty() then
             exit;
         Student.FindSet();
