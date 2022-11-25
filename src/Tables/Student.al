@@ -90,6 +90,14 @@ table 50100 Student
             CalcFormula = sum(Ispiti."ESPB Bodovi" where(Studije = field(Studije), "Studijski Program ID" = field("Studijski Program"), "Broj Indeksa" = field("Broj Indeksa"), Polozen = const(true)));
             Editable = false;
         }
+        field(12; "Broj polozenih predmeta"; Integer)
+        {
+            BlankZero = true;
+            Caption = 'Broj polozenih predmeta';
+            FieldClass = FlowField;
+            CalcFormula = count(Ispiti where(Studije = field(Studije), "Studijski Program ID" = field("Studijski Program"), "Broj Indeksa" = field("Broj Indeksa"), Polozen = const(true)));
+            Editable = false;
+        }
 
     }
 

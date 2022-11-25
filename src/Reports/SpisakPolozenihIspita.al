@@ -2,42 +2,33 @@ report 50100 "Spisak Polozenih Ispita"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
+    Caption = 'Spisak Polozenih Ispita';
     DefaultLayout = Word;
     WordLayout = './src/Reports/Layouts/SpisakPolozenihIspita.docx';
-    Caption = 'Spisak Polozenih Ispita';
-
 
     dataset
     {
         dataitem(Ispiti; Ispiti)
         {
-            CalcFields = "Naziv Predmeta";
+            DataItemTableView = sorting(Ocena) where(Polozen = const(true));
             RequestFilterFields = "Broj Indeksa";
-            DataItemTableView = where(Polozen = const(true));
-
-            column(OcenaIspita; Ispiti.Ocena)
+            column(NazivPredmeta; Ispiti."Naziv Predmeta")
             {
-
             }
-            column(KomentarIspita; Ispiti.Komentar)
+            column(KomentarPredmeta; Ispiti.Komentar)
             {
-
             }
-            column(NazivPredmetaIspita; Ispiti."Naziv Predmeta")
+            column(OcenaPredmeta; Format(Ispiti.Ocena))
             {
-
             }
-            column(ESPBBodoviIspita; Ispiti."ESPB Bodovi")
+            column(ESPBBodovi; Ispiti."ESPB Bodovi")
             {
-
             }
-            column(BrojIzlazakaIspita; Ispiti."Broj izlazaka")
+            column(BrojIzlazaka; Ispiti."Broj izlazaka")
             {
-
             }
             dataitem(Student; Student)
             {
-                CalcFields = "Prosecna Ocena";
                 DataItemLinkReference = Ispiti;
                 DataItemLink = "Broj Indeksa" = field("Broj Indeksa");
                 column(ImeStudenta; Student.Ime)
@@ -48,11 +39,15 @@ report 50100 "Spisak Polozenih Ispita"
                 {
 
                 }
+                column(JMBGStudenta; Student.JMBG)
+                {
+
+                }
                 column(EmailStudenta; Student.Email)
                 {
 
                 }
-                column(JMBGStudenta; Student.JMBG)
+                column(BrojPolozenihPredmeta; Student."Broj polozenih predmeta")
                 {
 
                 }
@@ -64,7 +59,6 @@ report 50100 "Spisak Polozenih Ispita"
                 {
 
                 }
-
                 trigger OnAfterGetRecord()
                 begin
                     if not IspisStudentInfo then begin
@@ -98,24 +92,35 @@ report 50100 "Spisak Polozenih Ispita"
                     field(IspisStudentInfo; IspisStudentInfo)
                     {
                         ApplicationArea = All;
-                        Caption = 'Ispis Student Info';
+                        Caption = 'Ispis informacija o studentu (JMBG i E-mail)';
                     }
+                }
+            }
+        }
+
+        actions
+        {
+            area(processing)
+            {
+                action(ActionName)
+                {
+                    ApplicationArea = All;
+
                 }
             }
         }
     }
 
-
     trigger OnPreReport()
     var
         UserSetup: Record "User Setup";
     begin
-        if not UserSetup.Get(UserId) then
+        IspisStudentInfo := true;
+        if not UserSetup.Get(UserId()) then
             exit;
         if not UserSetup."Dozvoli Stampanje Ispita" then
             Error('Nije vam dozvoljeno stampanje izvestaja!!!');
     end;
-
 
     var
         myInt: Integer;
