@@ -159,12 +159,13 @@ page 50101 "Student Card"
 
                 trigger OnAction()
                 var
-                    SpisakPolozenihIspita: Report "Spisak Polozenih Ispita";
+                    // SpisakPolozenihIspita: Report "Spisak Polozenih Ispita";
                     Ispiti: Record Ispiti;
                 begin
                     Ispiti.SetRange("Broj Indeksa", Rec."Broj Indeksa");
-                    SpisakPolozenihIspita.SetTableView(Ispiti);
-                    SpisakPolozenihIspita.Run();
+                    // SpisakPolozenihIspita.SetTableView(Ispiti);
+                    // SpisakPolozenihIspita.Run();
+                    Report.Run(Report::"Spisak Polozenih Ispita", true, true, Ispiti);
                 end;
             }
         }
