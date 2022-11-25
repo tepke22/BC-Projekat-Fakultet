@@ -155,15 +155,15 @@ page 50101 "Student Card"
                 PromotedCategory = Report;
                 PromotedIsBig = true;
                 ToolTip = 'Stampa izvestaj polozenih ispita studenta';
-                Image = CheckList;
+                Image = PrintReport;
 
                 trigger OnAction()
                 var
                     SpisakPolozenihIspita: Report "Spisak Polozenih Ispita";
-                    Student: Record Student;
+                    Ispiti: Record Ispiti;
                 begin
-                    Student.SetRange("Broj Indeksa", Rec."Broj Indeksa");
-                    SpisakPolozenihIspita.SetTableView(Student);
+                    Ispiti.SetRange("Broj Indeksa", Rec."Broj Indeksa");
+                    SpisakPolozenihIspita.SetTableView(Ispiti);
                     SpisakPolozenihIspita.Run();
                 end;
             }
